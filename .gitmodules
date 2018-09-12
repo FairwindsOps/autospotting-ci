@@ -1,0 +1,3 @@
+[submodule "autospotting"]
+	path = autospotting
+	url = https://github.com/cristim/autospotting
