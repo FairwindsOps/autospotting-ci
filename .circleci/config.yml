@@ -10,30 +10,19 @@ references:
         echo 'export CI_BUILD_NUM=$CIRCLE_BUILD_NUM' >> ${BASH_ENV}
         echo 'export CI_TAG=$CIRCLE_TAG' >> ${BASH_ENV}
         echo 'export ROK8S_INSTALL_PATH=${HOME}' >> ${BASH_ENV}
-        echo "export KUBECONFIG_DATA=\$$KUBECONFIG_DATA" >> ${BASH_ENV}
-
-  deploy_steps: &deploy_steps
-    docker:
-      - image: quay.io/reactiveops/ci-images:v7.2.9-node6
-    steps:
-      - checkout
-      - run: git submodule sync
-      - run: git submodule update --init
-      - *set_environment_variables
-      - run: prepare-kubectl
-      - run: k8s-deploy-and-verify -f ${ROK8S_CONFIG}
+        echo 'export TRAVIS_BUILD_NUMBER=${CI_TAG}' >> ${BASH_ENV}
+        echo 'export SHA=${CI_SHA1}' >> ${BASH_ENV}
 
 jobs:
   imagebuild:
     docker:
-      - image: quay.io/reactiveops/ci-images:v7.2.9-node6
+      - image: quay.io/reactiveops/ci-images:v7.14.1-alpine
     steps:
       - checkout
       - run: git submodule sync
       - run: git submodule update --init
       - setup_remote_docker
       - *set_environment_variables
-      - run: prepare-awscli
       - run: |
           cp autospotting/LICENSE .
           cp autospotting/BINARY_LICENSE .
@@ -41,17 +30,7 @@ jobs:
       - run: "docker-build -f ${ROK8S_CONFIG}"
       - run: "docker-push -f ${ROK8S_CONFIG}"
     environment:
-      ROK8S_CONFIG: deploy/staging.config
-  deploy_staging:
-    <<: *deploy_steps
-    environment:
-      ROK8S_CONFIG: deploy/staging.config
-      KUBECONFIG_DATA: KUBECONFIG_DATA_STAGING
-  deploy_prod:
-    <<: *deploy_steps
-    environment:
-      ROK8S_CONFIG: deploy/production.config
-      KUBECONFIG_DATA: KUBECONFIG_DATA_PROD
+      ROK8S_CONFIG: quay.config
 
 workflows:
   version: 2
@@ -61,18 +40,3 @@ workflows:
         filters:
           tags:
             ignore: /.*/
-    - deploy_staging:
-        requires:
-          - imagebuild
-        filters:
-          branches:
-            only:
-              - master
-          tags:
-            ignore: /.*/
-    - deploy_prod:
-        filters:
-          branches:
-            ignore: /.*/
-          tags:
-            only: /\d+\.\d+\.\d+$/

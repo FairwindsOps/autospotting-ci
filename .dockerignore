@@ -1,0 +1,6 @@
+**/.git
+quay.config
+README.md
+.gitmodules
+Dockerfile
+.circleci
