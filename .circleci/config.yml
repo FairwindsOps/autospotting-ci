@@ -23,12 +23,21 @@ jobs:
       - run: git submodule update --init
       - setup_remote_docker
       - *set_environment_variables
-      - run: |
-          cp autospotting/LICENSE .
-          cp autospotting/BINARY_LICENSE .
-          docker-pull -f ${ROK8S_CONFIG}
-      - run: "docker-build -f ${ROK8S_CONFIG}"
-      - run: "docker-push -f ${ROK8S_CONFIG}"
+      - run
+          name: Warm Docker cache
+          command: |
+            cp autospotting/LICENSE .
+            cp autospotting/BINARY_LICENSE .
+            docker-pull -f ${ROK8S_CONFIG}
+      - run:
+          name: Docker build
+          command: "docker-build -f ${ROK8S_CONFIG}"
+      - run:
+          name: Docker login
+          command: docker login -u="reactiveops+circleci" -p="${quay_token}" quay.io
+      - run:
+          name: Docker push
+          command: "docker-push -f ${ROK8S_CONFIG}"
     environment:
       ROK8S_CONFIG: quay.config
 
@@ -37,6 +46,7 @@ workflows:
   build_default:
     jobs:
     - imagebuild:
+        context: org-global
         filters:
           tags:
             ignore: /.*/
