@@ -1,8 +1,7 @@
-
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: autospotting
+  name: {{ template "autospotting.fullname" . }}
 spec:
   schedule: {{ quote .Values.schedule }}
   concurrencyPolicy: Forbid
@@ -29,4 +28,4 @@ spec:
                 memory: {{ .Values.resources.mem }}
             envFrom:
             - configMapRef:
-                name: autospotting-ci
+                name: {{ template "autospotting.fullname" . }}
