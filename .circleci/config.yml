@@ -47,3 +47,6 @@ workflows:
     jobs:
     - imagebuild:
         context: org-global
+        filters:
+          tags:
+            only: /\d+\.\d+\.\d+$/
