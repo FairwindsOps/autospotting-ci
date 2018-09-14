@@ -4,5 +4,6 @@ metadata:
   name: autospotting-ci
   namespace: autospotting-ci
 data:
-  REGIONS: {{ .Values.regions }}
-  ALLOWED_INSTANCE_TYPES: {{ .Values.allowed_instance_types }}
+  {{- range $key, $val := .Values.environment }}
+  {{ $key }}: {{ $val | quote }}
+  {{- end}}

@@ -3,5 +3,6 @@ schedule: "*/5 * * * *"
 resources:
   cpu: "30m"
   mem: "30Mi"
-regions: "us-east-1"
-allowed_instance_types: "r4.*"
+environment:
+  REGIONS: "us*"
+  ALLOWED_INSTANCE_TYPES: "r4.*"

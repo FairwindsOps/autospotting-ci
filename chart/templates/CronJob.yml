@@ -4,7 +4,7 @@ kind: CronJob
 metadata:
   name: autospotting
 spec:
-  schedule: {{ .Values.schedule }}
+  schedule: {{ quote .Values.schedule }}
   concurrencyPolicy: Forbid
   startingDeadlineSeconds: 300
   jobTemplate:
