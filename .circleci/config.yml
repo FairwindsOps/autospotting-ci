@@ -23,7 +23,7 @@ jobs:
       - run: git submodule update --init
       - setup_remote_docker
       - *set_environment_variables
-      - run
+      - run:
           name: Warm Docker cache
           command: |
             cp autospotting/LICENSE .
