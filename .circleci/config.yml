@@ -30,7 +30,9 @@ jobs:
             docker-pull -f ${ROK8S_CONFIG}
       - run:
           name: Docker build
-          command: "docker-build -f ${ROK8S_CONFIG}"
+          command: |
+            env
+            bash -x $(which docker-build) -f ${ROK8S_CONFIG}
       - run:
           name: Docker login
           command: docker login -u="reactiveops+circleci" -p="${quay_token}" quay.io
