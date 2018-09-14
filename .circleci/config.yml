@@ -10,8 +10,7 @@ references:
         echo 'export CI_BUILD_NUM=$CIRCLE_BUILD_NUM' >> ${BASH_ENV}
         echo 'export CI_TAG=$CIRCLE_TAG' >> ${BASH_ENV}
         echo 'export ROK8S_INSTALL_PATH=${HOME}' >> ${BASH_ENV}
-        echo 'export TRAVIS_BUILD_NUMBER=${CI_TAG}' >> ${BASH_ENV}
-        echo 'export SHA=${CI_SHA1}' >> ${BASH_ENV}
+        echo 'export ROK8S_DOCKER_BUILD_EXTRAARGS="--build-arg TRAVIS_BUILD_NUMBER=${CI_TAG} --build-arg SHA=${CI_SHA1}"'
 
 jobs:
   imagebuild:
