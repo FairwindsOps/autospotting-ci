@@ -1,0 +1,32 @@
+
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: autospotting
+spec:
+  schedule: {{ .Values.schedule }}
+  concurrencyPolicy: Forbid
+  startingDeadlineSeconds: 300
+  jobTemplate:
+    spec:
+      backoffLimit: 0
+      template:
+        spec:
+          tolerations:
+          - effect: NoSchedule
+            key: dedicated
+            operator: Equal
+            value: jobs
+          nodeSelector:
+            dedicated: jobs
+          restartPolicy: Never
+          containers:
+          - name: autospotting-ci
+            image: {{ .Values.image }}
+            resources:
+              requests:
+                cpu: {{ .Values.resources.cpu }}
+                memory: {{ .Values.resources.mem }}
+            envFrom:
+            - configMapRef:
+                name: autospotting-ci

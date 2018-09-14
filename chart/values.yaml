@@ -1,1 +1,7 @@
----
+image: 308882746353.dkr.ecr.us-east-1.amazonaws.com/parkassist/autospotting-ci:latest
+schedule: "*/5 * * * *"
+resources:
+  cpu: "30m"
+  mem: "30Mi"
+regions: "us-east-1"
+allowed_instance_types: "r4.*"
