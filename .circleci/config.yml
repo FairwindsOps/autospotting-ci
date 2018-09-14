@@ -47,6 +47,3 @@ workflows:
     jobs:
     - imagebuild:
         context: org-global
-        filters:
-          tags:
-            ignore: /.*/
