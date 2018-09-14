@@ -5,9 +5,8 @@ COPY autospotting/ .
 # Since FLAVOR=custom we need a binary license, but we don't actually want the
 #  upstream binary license
 COPY autospotting/LICENSE ./BINARY_LICENSE
-# The version is ${FLAVOR}-${TRAVIS_BUILD_NUMBER} ${FLAVOR}-${SHA} if no build number is set
+# The version is ${FLAVOR}-${TRAVIS_BUILD_NUMBER}
 ARG TRAVIS_BUILD_NUMBER
-ARG SHA
 RUN FLAVOR=reactiveops CGO_ENABLED=0 make
 
 FROM scratch
