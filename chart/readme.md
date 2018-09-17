@@ -37,6 +37,9 @@ This chart will do the following:
 ```yaml
 charts:
   autospotting:
+    repository:
+      git: https://github.com/reactiveops/autospotting-ci.git
+    chart: chart
     namespace: default
     values:
       image: quay.io/reactiveops/autospotting:0.1.3
