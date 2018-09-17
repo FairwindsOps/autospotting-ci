@@ -12,7 +12,6 @@ This chart will do the following:
 | `schedule`              | cron schedule the job will run with   | `*/5 * * * *`                                              |
 | `resources.cpu`         | cpu millicores to request             | `30m`                                                    |
 | `resources.mem`         | amount of physical mem to request     | `30Mi`|
-| `regions`               | comma separated list of regions where it should be activated.  Set to empty string to run in all regions. | `us-east-1` |
 | `environment`           | Map of environment settings. | See the table of default values below. |
 
 `environment` map default values:
@@ -33,3 +32,15 @@ This chart will do the following:
 | `AWS_ACCESS_KEY_ID` | aws access key id | |
 | `AWS_SECRET_ACCESS_KEY` | aws secret key | |
 | ` AWS_SESSION_TOKEN` | aws token | |
+
+### Example Autohelm configuration
+```yaml
+charts:
+  autospotting:
+    namespace: default
+    values:
+      image: quay.io/reactiveops/autospotting:0.1.3
+      environment:
+        REGIONS: "*"
+        ALLOWED_INSTANCE_TYPES: "*"
+```
