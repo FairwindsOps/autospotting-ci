@@ -11,13 +11,6 @@ spec:
       backoffLimit: 0
       template:
         spec:
-          tolerations:
-          - effect: NoSchedule
-            key: dedicated
-            operator: Equal
-            value: jobs
-          nodeSelector:
-            dedicated: jobs
           restartPolicy: Never
           containers:
           - name: autospotting-ci
