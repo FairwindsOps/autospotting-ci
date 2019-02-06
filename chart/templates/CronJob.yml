@@ -11,6 +11,11 @@ spec:
       backoffLimit: 0
       template:
         spec:
+          metadata:
+            {{- if .Values.podAnnotations }}
+            annotations:
+{{ toYaml .Values.podAnnotations | indent 14 }}
+            {{- end }}
           restartPolicy: Never
           containers:
           - name: autospotting-ci

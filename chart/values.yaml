@@ -6,3 +6,4 @@ resources:
 environment:
   REGIONS: "us*"
   ALLOWED_INSTANCE_TYPES: "r4.*"
+podAnnotations: {}
