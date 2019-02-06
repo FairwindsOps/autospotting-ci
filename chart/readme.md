@@ -8,7 +8,7 @@ This chart will do the following:
 ## Configuration
 | Parameter               | Description                           | Default                                                    |
 | ----------------------- | ----------------------------------    | ---------------------------------------------------------- |
-| `image`                 | uri to pull the image from            | `308882746353.dkr.ecr.us-east-1.amazonaws.com/parkassist/autospotting-ci:latest` |
+| `image`                 | uri to pull the image from            | `quay.io/reactiveops/autospotting` |
 | `schedule`              | cron schedule the job will run with   | `*/5 * * * *`                                              |
 | `resources.cpu`         | cpu millicores to request             | `30m`                                                    |
 | `resources.mem`         | amount of physical mem to request     | `30Mi`|
