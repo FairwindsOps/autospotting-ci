@@ -15,7 +15,7 @@ references:
 jobs:
   imagebuild:
     docker:
-      - image: quay.io/reactiveops/ci-images:v7.14.1-alpine
+      - image: quay.io/reactiveops/ci-images:v8.0-alpine
     steps:
       - checkout
       - run: git submodule sync
