@@ -1,4 +1,4 @@
-# Copyright 2019 ReactiveOps Inc
+# Copyright 2019 FairwindsOps Inc
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,13 +24,13 @@ COPY autospotting/LICENSE ./BINARY_LICENSE
 
 # The version is ${FLAVOR}-${TRAVIS_BUILD_NUMBER}
 ARG TRAVIS_BUILD_NUMBER
-RUN FLAVOR=reactiveops CGO_ENABLED=0 make
+RUN FLAVOR=fairwinds CGO_ENABLED=0 make
 
 FROM scratch
 WORKDIR /
 
 LABEL license=Apache-2.0
-LABEL maintainer=ReactiveOps
+LABEL maintainer=Fairwinds
 
 COPY autospotting/LICENSE /
 COPY --from=golang /go/src/github.com/cristim/autospotting/autospotting .

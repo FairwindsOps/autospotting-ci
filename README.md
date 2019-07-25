@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/reactiveops/autospotting-ci/tree/master.svg?style=svg)](https://circleci.com/gh/reactiveops/autospotting-ci/tree/master)
+[![CircleCI](https://circleci.com/gh/FairwindsOps/autospotting-ci/tree/master.svg?style=svg)](https://circleci.com/gh/FairwindsOps/autospotting-ci/tree/master)
 
 # autospotting-ci
 
