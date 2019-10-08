@@ -33,6 +33,6 @@ LABEL license=Apache-2.0
 LABEL maintainer=Fairwinds
 
 COPY autospotting/LICENSE /
-COPY --from=golang /go/src/github.com/cristim/autospotting/autospotting .
+COPY --from=golang /go/src/github.com/cristim/autospotting/AutoSpotting .
 COPY --from=golang /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-ENTRYPOINT ["./autospotting"]
+ENTRYPOINT ["./AutoSpotting"]
