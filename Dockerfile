@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM golang:1.10-alpine as golang
+FROM golang:1.13.1-alpine as golang
 
 RUN apk add -U --no-cache ca-certificates git make
 WORKDIR /go/src/github.com/cristim/autospotting/
@@ -33,6 +33,6 @@ LABEL license=Apache-2.0
 LABEL maintainer=Fairwinds
 
 COPY autospotting/LICENSE /
-COPY --from=golang /go/src/github.com/cristim/autospotting/autospotting .
+COPY --from=golang /go/src/github.com/cristim/autospotting/AutoSpotting .
 COPY --from=golang /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-ENTRYPOINT ["./autospotting"]
+ENTRYPOINT ["./AutoSpotting"]
