@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM golang:1.13.1-alpine as golang
+FROM golang:1.13.3-alpine as golang
 
 RUN apk add -U --no-cache ca-certificates git make
 WORKDIR /go/src/github.com/cristim/autospotting/
